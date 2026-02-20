@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>India Map with Hotspots</title>
+    <meta charset="UTF-8">
+
+    <!-- Embedded CSS -->
+    <style>
+        body {
+            background-color: #f0f8ff;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+            color: darkblue;
+        }
+
+        h2 {
+            text-align: center;
+            color: darkred;
+        }
+
+        .map-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        iframe {
+            border: 3px solid black;
+            margin-top: 20px;
+        }
+
+        a {
+            text-decoration: none;
+            font-weight: bold;
+            color: blue;
+        }
+
+        a:hover {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>India Map with Hotspots</h1>
+
+    <!-- Inline CSS -->
+    <p style="text-align:center; font-size:18px; color:darkgreen;">
+        Click on important cities to know more about them.
+    </p>
+
+    <div class="map-container">
+
+        <!-- Make sure this image is in same folder -->
+        <img src="india-map.jpg" usemap="#indiamap" width="700" height="600" alt="India Map">
+
+        <map name="indiamap">
+
+            <!-- Delhi -->
+            <area shape="circle" coords="350,150,30"
+                  href="https://en.wikipedia.org/wiki/Delhi"
+                  target="_blank" alt="Delhi">
+
+            <!-- Mumbai -->
+            <area shape="circle" coords="250,350,30"
+                  href="https://en.wikipedia.org/wiki/Mumbai"
+                  target="_blank" alt="Mumbai">
+
+            <!-- Chennai -->
+            <area shape="circle" coords="450,450,30"
+                  href="https://en.wikipedia.org/wiki/Chennai"
+                  target="_blank" alt="Chennai">
+
+            <!-- Kolkata -->
+            <area shape="circle" coords="550,300,30"
+                  href="https://en.wikipedia.org/wiki/Kolkata"
+                  target="_blank" alt="Kolkata">
+
+        </map>
+    </div>
+
+    <h2>Embedded India Google Map (Frame)</h2>
+
+    <div style="text-align:center;">
+        <iframe 
+            src="https://maps.google.com/maps?q=India&output=embed"
+            width="700" height="400">
+        </iframe>
+    </div>
+
+    <div style="text-align:center; margin-top:20px;">
+        <a href="https://www.incredibleindia.org/" target="_blank">
+            Visit Incredible India Official Website
+        </a>
+    </div>
+
+</body>
+</html>
