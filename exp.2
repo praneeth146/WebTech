@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration Validation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .form-container {
+            background: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; /* Ensures padding doesn't affect width */
+        }
+        textarea {
+            resize: vertical;
+            height: 80px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        #errorMessages {
+            background-color: #ffebee;
+            color: #c62828;
+            padding: 10px;
+            margin-top: 15px;
+            border-radius: 4px;
+            display: none; /* Hidden by default */
+            font-size: 14px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Registration Form</h2>
+    <form id="registrationForm">
+        <div class="input-group">
+            <input type="text" id="firstName" placeholder="First Name">
+        </div>
+        <div class="input-group">
+            <input type="text" id="lastName" placeholder="Last Name">
+        </div>
+        <div class="input-group">
+            <input type="password" id="password" placeholder="Password">
+        </div>
+        <div class="input-group">
+            <input type="text" id="email" placeholder="Email (name@domain.com)">
+        </div>
+        <div class="input-group">
+            <input type="text" id="mobile" placeholder="Mobile Number">
+        </div>
+        <div class="input-group">
+            <textarea id="address" placeholder="Address"></textarea>
+        </div>
+        
+        <button type="submit">Register</button>
+    </form>
+
+    <div id="errorMessages"></div>
+</div>
+
+<script>
+    document.getElementById('registrationForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent actual form submission
+        
+        const errorDiv = document.getElementById('errorMessages');
+        errorDiv.innerHTML = ""; // Reset errors
+        errorDiv.style.display = "none";
+        
+        let errors = [];
+
+        // 1. Validate First Name: Alphabets only, length >= 6
+        const firstName = document.getElementById('firstName').value;
+        const nameRegex = /^[A-Za-z]+$/;
+        if (firstName.length < 6 || !nameRegex.test(firstName)) {
+            errors.push("• First Name must contain only alphabets and be at least 6 characters long.");
+        }
+
+        // 2. Validate Password: Length >= 6
+        const password = document.getElementById('password').value;
+        if (password.length < 6) {
+            errors.push("• Password must be at least 6 characters long.");
+        }
+
+        // 3. Validate E-mail: Standard pattern
+        const email = document.getElementById('email').value;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            errors.push("• Invalid Email format. Please use name@domain.com.");
+        }
+
+        // 4. Validate Mobile Number: Exactly 10 digits, no characters
+        const mobile = document.getElementById('mobile').value;
+        const mobileRegex = /^\d{10}$/;
+        if (!mobileRegex.test(mobile)) {
+            errors.push("• Mobile number must contain exactly 10 digits.");
+        }
+
+        // 5. Validate Last Name: Not empty
+        const lastName = document.getElementById('lastName').value.trim();
+        if (lastName === "") {
+            errors.push("• Last Name field cannot be empty.");
+        }
+
+        // 6. Validate Address: Not empty
+        const address = document.getElementById('address').value.trim();
+        if (address === "") {
+            errors.push("• Address field cannot be empty.");
+        }
+
+        // Display results
+        if (errors.length > 0) {
+            errorDiv.style.display = "block";
+            errorDiv.innerHTML = errors.join("<br>");
+        } else {
+            alert("Success! Form data is valid.");
+            // You can now submit the form or reset it
+            // this.submit(); 
+        }
+    });
+</script>
+
+</body>
+</html>
