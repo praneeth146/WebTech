@@ -1,0 +1,213 @@
+?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_dark">
+
+    <!-- Top Toolbar -->
+    <LinearLayout
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:background="@color/bg_dark"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/app_name"
+            android:textColor="@color/text_primary"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif-medium"
+            android:paddingStart="8dp"/>
+
+        <!-- Theme toggle button -->
+        <ImageButton
+            android:id="@+id/btnThemeToggle"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:src="@drawable/ic_dark_mode"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:tint="@color/text_primary"
+            android:contentDescription="Toggle theme"
+            android:scaleType="centerInside"
+            android:padding="8dp"/>
+
+        <!-- History button -->
+        <ImageButton
+            android:id="@+id/btnHistory"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:src="@drawable/ic_history"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:tint="@color/text_primary"
+            android:contentDescription="History"
+            android:scaleType="centerInside"
+            android:padding="8dp"/>
+
+    </LinearLayout>
+
+    <!-- Display Area -->
+    <LinearLayout
+        android:id="@+id/displayArea"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:gravity="bottom|end"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="12dp"
+        android:background="@color/bg_display"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/historyPanel"
+        app:layout_constraintHeight_percent="0.30">
+
+        <!-- Expression / history line -->
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            android:layoutDirection="rtl">
+            <TextView
+                android:id="@+id/tvExpression"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/text_secondary"
+                android:fontFamily="sans-serif-light"
+                android:singleLine="true"
+                android:text=""
+                android:paddingBottom="4dp"/>
+        </HorizontalScrollView>
+
+        <!-- Main display -->
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            android:layoutDirection="rtl">
+            <TextView
+                android:id="@+id/tvDisplay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="64sp"
+                android:textColor="@color/text_primary"
+                android:fontFamily="sans-serif-light"
+                android:singleLine="true"
+                android:text="0"/>
+        </HorizontalScrollView>
+
+    </LinearLayout>
+
+    <!-- History Panel (hidden by default) -->
+    <LinearLayout
+        android:id="@+id/historyPanel"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:background="@color/bg_history"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/displayArea"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.0">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="History"
+            android:textColor="@color/text_secondary"
+            android:textSize="13sp"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="4dp"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <LinearLayout
+                android:id="@+id/historyList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp"/>
+        </ScrollView>
+
+        <Button
+            android:id="@+id/btnClearHistory"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="Clear History"
+            android:textColor="@color/accent_orange"
+            android:paddingEnd="16dp"/>
+
+    </LinearLayout>
+
+    <!-- Button Grid -->
+    <GridLayout
+        android:id="@+id/buttonGrid"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:columnCount="4"
+        android:rowCount="6"
+        android:background="@color/bg_dark"
+        app:layout_constraintTop_toBottomOf="@id/historyPanel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <!-- ROW 0: Function row -->
+        <Button android:id="@+id/btnClear"   style="@style/CalcButtonTop"   android:text="AC"  android:layout_columnWeight="1" android:layout_rowWeight="1"/>
+        <Button android:id="@+id/btnSign"    style="@style/CalcButtonTop"   android:text="+/−" android:layout_columnWeight="1" android:layout_rowWeight="1"/>
+        <Button android:id="@+id/btnPercent" style="@style/CalcButtonTop"   android:text="%" android:layout_columnWeight="1" android:layout_rowWeight="1"/>
+        <Button android:id="@+id/btnDivide"  style="@style/CalcButtonOp"    android:text="÷"   android:layout_columnWeight="1" android:layout_rowWeight="1"/>
+
+        <!-- ROW 1 -->
+        <Button android:id="@+id/btn7" style="@style/CalcButtonNum" android:text="7" android:layout_columnWeight="1" android:layout_rowWeight="1"/>
+        <Button android:id="@+id/btn8" style="@style/CalcButtonNum" android:text="8" android:layout_columnWeight="1" android:layout_rowWeight="1"/>
+        <Button android:id="@+id/btn9" style="@style/CalcButtonNum" android:text="9" android:layout_columnWeight="1" android:layout_rowWeight="1"/>
+        <Button android:id="@+id/btnMultiply" style="@style/CalcButtonOp" android:text="×" android:layout_columnWeight="1" android:layout_rowWeight="1"/>
+
+        <!-- ROW 2 -->
+        <Button android:id="@+id/btn4" style="@style/CalcButtonNum" android:text="4" android:layout_columnWeight="1" android:layout_rowWeight="1"/>
+        <Button android:id="@+id/btn5" style="@style/CalcButtonNum" android:text="5" android:layout_columnWeight="1" android:layout_rowWeight="1"/>
+        <Button android:id="@+id/btn6" style="@style/CalcButtonNum" android:text="6" android:layout_columnWeight="1" android:layout_rowWeight="1"/>
+        <Button android:id="@+id/btnSubtract" style="@style/CalcButtonOp" android:text="−" android:layout_columnWeight="1" android:layout_rowWeight="1"/>
+
+        <!-- ROW 3 -->
+        <Button android:id="@+id/btn1" style="@style/CalcButtonNum" android:text="1" android:layout_columnWeight="1" android:layout_rowWeight="1"/>
+        <Button android:id="@+id/btn2" style="@style/CalcButtonNum" android:text="2" android:layout_columnWeight="1" android:layout_rowWeight="1"/>
+        <Button android:id="@+id/btn3" style="@style/CalcButtonNum" android:text="3" android:layout_columnWeight="1" android:layout_rowWeight="1"/>
+        <Button android:id="@+id/btnAdd" style="@style/CalcButtonOp" android:text="+" android:layout_columnWeight="1" android:layout_rowWeight="1"/>
+
+        <!-- ROW 4: Zero spans 2 columns -->
+        <Button
+            android:id="@+id/btn0"
+            style="@style/CalcButtonNum"
+            android:text="0"
+            android:layout_columnWeight="2"
+            android:layout_rowWeight="1"
+            android:layout_columnSpan="2"
+            android:gravity="center_vertical|start"
+            android:paddingStart="36dp"/>
+        <Button android:id="@+id/btnDot"    style="@style/CalcButtonNum" android:text="." android:layout_columnWeight="1" android:layout_rowWeight="1"/>
+        <Button android:id="@+id/btnEquals" style="@style/CalcButtonEq"  android:text="=" android:layout_columnWeight="1" android:layout_rowWeight="1"/>
+
+    </GridLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
